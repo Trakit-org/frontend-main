@@ -5,11 +5,11 @@ import Logo from '../assets/Logo.png'
 const Header = () => {
     return (
         <header>
-            <div className='flex justify-between items-center px-12 py-5 bg-blueish-50'>
-                <div className='flex w-32'>
+            <div className='flex justify-between items-center px-6 md:px-12 py-7 md:py-5 bg-blueish-50'>
+                <div className='flex md:w-32 w-28'>
                     <img src={Logo} alt="" />
                 </div>
-                <ul className='flex space-x-8 text-white items-center text-lg font-semibold'>
+                <ul className='hidden md:flex space-x-8 text-white items-center text-lg font-semibold '>
                     <div className='flex space-x-10'>
                         <Link to="/"><li>Features</li></Link>
                         <Link to="/">
@@ -32,6 +32,13 @@ const Header = () => {
                         </Link>
                     </div>
                 </ul>
+                <div className='md:hidden flex text-2xl'>
+                    <button className='text-white'>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </header>
     );
