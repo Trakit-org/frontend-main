@@ -7,7 +7,9 @@ const Header = () => {
         <header>
             <div className='flex justify-between items-center px-6 md:px-12 py-7 md:py-5 bg-blueish-50'>
                 <div className='flex md:w-32 w-28'>
-                    <img src={Logo} alt="" />
+                    <Link to="/">
+                        <img src={Logo} alt="" />
+                    </Link>
                 </div>
                 <ul className='hidden md:flex space-x-8 text-white items-center text-lg font-semibold '>
                     <div className='flex space-x-10'>
