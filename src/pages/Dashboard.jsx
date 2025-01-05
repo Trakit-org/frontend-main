@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaRegCalendar, FaMoneyBillAlt, FaChartLine } from 'react-icons/fa';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -41,9 +42,15 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex flex-col fixed md:absolute right-10 bottom-24 md:-bottom-10 p-4 md:p-0">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded mb-4">Manage Subscriptions</button>
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded mb-4">Add Subscription</button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded">Delete Subscription</button>
+                <Link to="/manage-subscriptions" className="">
+                    <button className="bg-blueish-100 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded mb-4">Manage Subscriptions</button>
+                </Link>
+                <Link to='/add-subscription'>
+                    <button className="bg-green-600  hover:bg-green-700 text-white font-bold py-3 px-6 rounded mb-4">Upcoming Renewals</button>
+                </Link>
+                <Link to='/add-subscription'>
+                    <button className="bg-teal-600 hover:bg-greenish text-white font-bold py-3 px-9 rounded">Add Subscription</button>
+                </Link>
             </div>
         </div>
         <div className=''>

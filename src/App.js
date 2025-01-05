@@ -7,6 +7,7 @@ import About from "./pages/About";
 import AddSubscription from "./pages/AddSubscription";
 import Dashboard from "./pages/Dashboard";
 import ManageSubscription from "./pages/ManageSubscription";
+import Renewal from "./pages/Renewal";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/add-subscription" element={<AddSubscription />} />
-        <Route path="/manage-subscription" element={<ManageSubscription />} />
+        <Route path="/manage-subscriptions" element={<ManageSubscription />} />
+        <Route path="/renewals" element={<Renewal />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>

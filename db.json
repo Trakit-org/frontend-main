@@ -1,0 +1,20 @@
+{
+    "subscription": [
+        {
+            "id": 1,
+            "users_id": 1,
+            "service": "YouTube",
+            "price": "Ghc 50",
+            "Billing cycle": "Yearly",
+
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "username": "James",
+            "fullname": "James Donkor",
+            "email": "jamesdonkor987@gmail.com"
+        }
+    ]
+}

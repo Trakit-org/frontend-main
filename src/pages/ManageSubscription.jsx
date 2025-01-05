@@ -106,18 +106,20 @@ const ManageSubscriptionPage = () => {
   return (
     <div>
         <Header/>
-        <div className="container mx-auto p-4 md:mt-12">
+        <div className="container mx-auto p-4 my-12">
         <h1 className="text-3xl font-bold mb-4">Manage Subscriptions</h1>
         <div className="flex justify-between mb-4">
             <input
             type="search"
             placeholder="Filter subscriptions"
-            className="w-full md:w-1/2 xl:w-1/3 p-2"
+            className="w-full md:w-1/2 xl:w-1/3 p-2 outline-none border-2 rounded"
             onChange={handleFilter}
             />
         </div>
         <div className="flex flex-wrap -mx-4">
-            {currentSubscriptions.map((subscription) => (
+            {currentSubscriptions.length === 0 ? (
+                <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28">No matching subscription</h2>
+            ) : currentSubscriptions.map((subscription) => (
             <div key={(subscription.id)} className="w-full md:w-1/2 xl:w-1/3 p-4">
                 <div className="bg-white rounded-lg shadow-md p-4">
                 <h2 className="text-lg font-bold mb-2">{subscription.name}</h2>
@@ -139,8 +141,12 @@ const ManageSubscriptionPage = () => {
                 </div>
             </div>
             ))}
+
         </div>
-        <div className="flex justify-end mt-4 mb-12">
+
+        {
+        !(subscriptionsData.length < 5 || currentSubscriptions.length < 5) && (    
+        <div className="flex justify-end mt-4 ">
             <button
             className="bg-greenish text-white font-bold py-2 px-4 rounded"
             onClick={() => handlePageChange(currentPage - 1)}
@@ -156,6 +162,11 @@ const ManageSubscriptionPage = () => {
             Next
             </button>
         </div>
+        )
+        }
+        {
+          console.log(currentSubscriptions.length)
+        }
         </div>
         <Footer/>
     </div>
