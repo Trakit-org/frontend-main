@@ -37,7 +37,7 @@ const AddSubscription = () => {
                 <label className="block text-lg font-medium text-gray-700 mb-2" htmlFor="subscription-date">Next Billing Date: <span className='ml-2 text-red-600'> *</span></label>
                 <input className="block w-full p-2 border border-gray-300 rounded-lg" type="date" id="subscription-date" name="subscription-date" required/>
             </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded mt-4" type="submit">Add Subscription</button>
+            <button className="bg-greenish hover:bg-teal-600 text-white font-bold py-3 px-6 rounded mt-4" type="submit">Add Subscription</button>
             </form>
         </div>
         </div>

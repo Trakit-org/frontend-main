@@ -5,7 +5,7 @@ import { FaFacebook } from "react-icons/fa";
 
 const Team = () => {
   return (
-    <section className="key-employees bg-[#F7F7F7] py-16 md:pt-28 md:px-32 px-9">
+    <section className="key-employees bg-white py-16 md:pt-28 md:px-32 px-9">
       <h2 className="text-4xl text-center font-bold">
         Our <span className="span mb-2">Team</span>
       </h2>

@@ -11,9 +11,9 @@ const Header = () => {
                         <img src={Logo} alt="" />
                     </Link>
                 </div>
-                <ul className='hidden md:flex space-x-8 text-white items-center text-lg font-semibold '>
+                <ul className='hidden md:flex space-x-5 text-white items-center text-lg font-semibold '>
                     <div className='flex space-x-10'>
-                        <Link to="/"><li>Features</li></Link>
+                        {/* <Link to="/"><li>Features</li></Link> */}
                         <Link to="/">
                             <li>
                                 How It Works
@@ -21,7 +21,7 @@ const Header = () => {
                         </Link>
                         <Link to="/about"><li>About Us</li></Link>
                     </div>
-                    <div className='flex space-x-5 px-8 py-4 border-s-[1.5px]'>
+                    <div className='flex space-x-5 px-8 py-4'>
                         <Link to="/login">
                             <li>
                                 <FaSignInAlt /> Login

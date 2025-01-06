@@ -45,7 +45,7 @@ const Dashboard = () => {
                 <Link to="/manage-subscriptions" className="">
                     <button className="bg-blueish-100 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded mb-4">Manage Subscriptions</button>
                 </Link>
-                <Link to='/add-subscription'>
+                <Link to='/renewals'>
                     <button className="bg-green-600  hover:bg-green-700 text-white font-bold py-3 px-6 rounded mb-4">Upcoming Renewals</button>
                 </Link>
                 <Link to='/add-subscription'>
