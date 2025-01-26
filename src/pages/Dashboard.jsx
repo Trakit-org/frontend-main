@@ -1,61 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { FaRegCalendar, FaMoneyBillAlt, FaChartLine } from 'react-icons/fa';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { AuthContext } from '../AuthContext';
+import Sidebar from '../components/Sidebar'; // Import the Sidebar
 
 const Dashboard = () => {
+  const { subscriptions, user } = useContext(AuthContext);
+
   return (
-    <div>
-        <Header/>
-        <div className="flex h-screen md:mt-8">
-            <div className="w-full p-10 md:px-20">
-                <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-                <div className="flex flex-wrap -mx-4">
-                <div className="w-full md:w-1/2 xl:w-1/3 p-4 py-5 md:py-4">
-                    <div className="bg-white rounded-lg shadow-md p-5 flex items-start">
-                    <FaChartLine size={24} className="text-gray-600 mr-4" />
-                    <div className=''>
-                        <h2 className="text-lg font-bold mb-2">Subscriptions Overview</h2>
-                        <p className="text-gray-600">You have 10 active subscriptions</p>
-                    </div>
-                    </div>
+    <div className="flex relative min-h-screen bg-gray-100">
+      <Sidebar /> {/* Sidebar on the left */}
+      <div className="flex-grow flex flex-col">
+        <Header />
+        <div className="p-8 md:px-20">
+          <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+          <div className="flex flex-wrap -mx-4">
+            <div className="w-full md:w-1/2 xl:w-1/3 p-2 py-5 md:py-4">
+              <div className="h-full text-white bg-blueish-100 rounded-lg shadow-md  py-5 px-6 flex items-start">
+                <FaChartLine size={36} className=" mr-4" />
+                <div className='mb-12'>
+                    <p className="text-lg font-bold mb-2 ">Subscriptions Overview</p>
+                    <p className="">You have total of {subscriptions ? subscriptions.length : 0 } active subscriptions</p>
                 </div>
-                <div className="w-full md:w-1/2 xl:w-1/3 p-4 py-5 md:py-4">
-                    <div className="bg-white rounded-lg shadow-md p-5 flex items-start">
-                    <FaMoneyBillAlt size={24} className="text-gray-600 mr-4" />
-                    <div>
-                        <h2 className="text-lg font-bold mb-2">Money Spent</h2>
-                        <p className="text-gray-600">$1000 this month</p>
-                    </div>
-                    </div>
-                </div>
-                <div className="w-full md:w-1/2 xl:w-1/3 p-4 py-5 md:py-4">
-                    <div className="bg-white rounded-lg shadow-md p-5 flex items-start">
-                    <FaRegCalendar size={24} className="text-gray-600 mr-4" />
-                    <div>
-                        <h2 className="text-lg font-bold mb-2">Upcoming Renewals</h2>
-                        <p className="text-gray-600">5 subscriptions renewing this week</p>
-                    </div>
-                    </div>
-                </div>
-                </div>
+              </div>
             </div>
-            <div className="flex flex-col fixed md:absolute right-10 bottom-24 md:-bottom-10 p-4 md:p-0">
-                <Link to="/manage-subscriptions" className="">
-                    <button className="bg-blueish-100 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded mb-4">Manage Subscriptions</button>
-                </Link>
-                <Link to='/renewals'>
-                    <button className="bg-green-600  hover:bg-green-700 text-white font-bold py-3 px-6 rounded mb-4">Upcoming Renewals</button>
-                </Link>
-                <Link to='/add-subscription'>
-                    <button className="bg-teal-600 hover:bg-greenish text-white font-bold py-3 px-9 rounded">Add Subscription</button>
-                </Link>
+            <div className="w-full md:w-1/2 xl:w-1/3 md:p-2 py-5 md:py-4">
+              <div className="h-full text-white bg-greenish rounded-lg shadow-md  py-5 px-6 flex items-start">
+                <FaMoneyBillAlt size={34} className=" mr-4" />
+                <div className='mb-20'>
+                  <p className="text-lg font-bold mb-2">Money Spent</p>
+                  <p className="">$1000 this month</p>
+                </div>
+              </div>
             </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 md:p-2 py-5 md:py-4">
+              <div className="h-full bg-yellow-400 text-white rounded-lg shadow-md  py-5 px-6 flex items-start">
+                <FaRegCalendar size={34} className=" mr-4" />
+                <div className='mb-16'>
+                <p className="text-lg font-bold mb-2">Upcoming Renewals</p>
+                <p className="">5 subscriptions renewing this week</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
         </div>
-        <div className=''>
-            <Footer/>
-        </div>
+
+      </div>
     </div>
   );
 };

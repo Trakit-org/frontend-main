@@ -56,6 +56,14 @@ h6 {
   display: flex;
 }
 
+/* In your global CSS file or component-specific CSS */
+.sidebar {
+  height: 100vh; /* Full height of the viewport */
+  position: sticky; /* Keep it in place when scrolling */
+  top: 0; /* Stick to the top */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
 @media (max-width: 670px) {
   .hero-about {
     background-position: -180% 125%;
