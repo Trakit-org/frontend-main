@@ -25,7 +25,7 @@ const Header = () => {
               <nav className="flex space-x-6 text-lg">
                 <Link to="/" className="text-white hover:text-gray-200">Home</Link>
                 <Link to="/about" className="text-white hover:text-gray-200">About Us</Link>
-                <Link to="/contact" className="text-white hover:text-gray-200">Contact Us</Link>
+                {/* <Link to="/contact" className="text-white hover:text-gray-200">Contact Us</Link> */}
                 {/* <Link to="/login" className="text-white hover:text-gray-200">Login</Link> */}
               </nav>
             )}
