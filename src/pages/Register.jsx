@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { FaUser } from "react-icons/fa";
+
 
 const Register = () => {
     const { register, setIsAuthenticated } = useContext(AuthContext);
@@ -28,7 +29,7 @@ const Register = () => {
                 setIsAuthenticated(true);
                 navigate('/dashboard');
             }else{
-                setError(result.error);
+                setError(result.error == 'Failed to fetch' ? 'Try again': result.error);
             }
         }
     };
@@ -64,6 +65,9 @@ const Register = () => {
                         <button type="submit" className="w-full mb-5 rounded-md bg-blue-600 text-white p-2"> 
                             Submit
                         </button>
+
+                    <p className=" text-gray-800">Already have an account? <Link to="/login" className="text-blue-600">Login</Link></p>
+
                     </form>
                 </div>
         </>

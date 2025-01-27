@@ -28,7 +28,7 @@ const Login = () => {
             console.log("acess: ", accessToken)
             navigate('/dashboard');
         }else{
-            setError(result.error);
+            setError(result.error == 'Failed to fetch' ? 'Try again': result.error);
             console.log("login: ",result)
         }
     }

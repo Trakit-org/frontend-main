@@ -1,10 +1,12 @@
 // ManageSubscriptionPage.js
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../AuthContext";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 
-const subscriptionsData = [
+const subscriptionData = [
   {
     id: 1,
     name: 'Netflix Subscription',
@@ -79,21 +81,38 @@ const subscriptionsData = [
 ];
 
 const ManageSubscriptionPage = () => {
-  const [subscriptions, setSubscriptions] = useState(subscriptionsData);
-  const [filteredSubscriptions, setFilteredSubscriptions] = useState(subscriptionsData);
+  // const [subscriptions, setSubscriptions] = useState(subscriptions);
+  const { subscriptions, user, deleteSubscription } = useContext(AuthContext);
+
+  const [filteredSubscriptions, setFilteredSubscriptions] = useState(subscriptions);
   const [currentPage, setCurrentPage] = useState(1);
   const [subscriptionsPerPage, setSubscriptionsPerPage] = useState(5);
 
+  const navigate = useNavigate()
+
+  console.log(subscriptions)
+
+
   const handleFilter = (event) => {
-    const filterValue = event.target.value.toLowerCase();
-    const filteredSubscriptions = subscriptionsData.filter((subscription) => {
-      return (
-        subscription.name.toLowerCase().includes(filterValue) ||
-        subscription.billingCycle.toLowerCase().includes(filterValue) ||
-        subscription.status.toLowerCase().includes(filterValue)
-      );
-    });
-    setFilteredSubscriptions(filteredSubscriptions);
+    if (event && event.target && event.target.value) {
+      const filterValue = event.target.value.toLowerCase();
+      const filteredSubscriptions = subscriptions.filter((subscription) => {
+        return (
+          subscription.name.includes(filterValue) ||
+          subscription.billing_cycle.includes(filterValue)
+          // subscription.status.toLowerCase().includes(filterValue)
+        );
+      });
+      setFilteredSubscriptions(filteredSubscriptions);
+    }
+  };
+  
+  const handleDelete = (event, id) => {
+    event.preventDefault();
+    deleteSubscription(id)
+    !currentSubscriptions && 
+    navigate('/dashboard')
+
   };
 
   const handlePageChange = (pageNumber) => {
@@ -109,46 +128,53 @@ const ManageSubscriptionPage = () => {
       <Sidebar/>
       <div className="flex-grow flex flex-col">
           <Header/>
-          <div className=" md:mx-auto p-4 md:p-5 md:px-12 md:mt-8 mt-2 mb-12 border-2 w-full">
+          <div className=" md:mx-auto p-4 md:p-5 md:px-12 md:mt-8 mt-2 mb-12  w-full">
           <h1 className="text-3xl font-bold mb-4">Manage Subscriptions</h1>
           <div className="flex justify-between mb-4">
               <input
               type="search"
               placeholder="Filter subscriptions"
-              className="w-full md:w-1/2 xl:w-1/3 p-2 outline-none border-2 rounded"
+              className="w-full md:w-1/2 xl:w-1/3 p-2 outline-none  rounded"
               onChange={handleFilter}
               />
           </div>
           <div className="flex flex-wrap -mx-4">
-              {currentSubscriptions.length === 0 ? (
-                  <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28 border-2">No matching subscription</h2>
+              {currentSubscriptions.length === 0 && filteredSubscriptions === 0 ? (
+                  <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28 ">No matching subscription</h2>
               ) : currentSubscriptions.map((subscription) => (
               <div key={(subscription.id)} className="w-full md:w-1/2 xl:w-1/3 p-4">
                   <div className="bg-white rounded-lg shadow-md p-4">
-                  <h2 className="text-lg font-bold mb-2">{subscription.name}</h2>
-                  <p className="text-gray-600">Billing Cycle: {subscription.billingCycle}</p>
-                  <p className="text-gray-600">Next Billing Date: {subscription.nextBillingDate}</p>
-                  <p className="text-gray-600">Status: {subscription.status}</p>
+                  <h2 className="text-lg font-bold mb-2">{subscription.name} Subscription</h2>
+                  <p className="text-gray-600">Billing Cycle: {subscription.billing_cycle}</p>
+                  <p className="text-gray-600">Next Billing Date: {subscription.renewal_date}</p>
+                  {/* <p className="text-gray-600">Status:</p> */}
                   <div className="flex justify-end">
+                    <Link to={`/update-subscription/${subscription.id}`}>
                       <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                       >
                       Edit
                       </button>
-                      <button
+                    </Link>
+
+                    <Link to=''>
+                      <button onClick={(e) => handleDelete(e, subscription.id)}
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
                       >
                       Cancel
                       </button>
+                    </Link>
                   </div>
                   </div>
               </div>
               ))}
 
+              
+
           </div>
 
           {
-          !(subscriptionsData.length < 5 || currentSubscriptions.length < 5) && (    
+          !(subscriptions.length < 5 || currentSubscriptions.length < 5) && (    
           <div className="flex justify-end mt-4 ">
               <button
               className="bg-greenish text-white font-bold py-2 px-4 rounded"

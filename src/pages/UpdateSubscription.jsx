@@ -1,28 +1,37 @@
 import { useContext, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../AuthContext";
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { useNavigate } from 'react-router-dom';
 
-const AddSubscription = () => {
-  const { addSubscription, user } = useContext(AuthContext);
+
+const UpdateSubscription = () => {
+  const { updateSubscription, subscriptions, user } = useContext(AuthContext);
+  const [errors, setErrors] = useState({});
+  const { id } = useParams()
 
   const navigate = useNavigate()
 
+  const subscription = subscriptions.filter((subscription) => subscription.id == id)
+  
   const [formData, setFormData] = useState({
-    name: '',
-    billing_cycle: '',
-    price: '',
-    user_id: user? user.id : '',
+    name: subscription[0].name,
+    billing_cycle: subscription[0].billing_cycle,
+    price: subscription[0].price,
+    renewal_date: subscription[0].renewal_date,
+    user_id: user ? user.id : '',
   });
-  const [errors, setErrors] = useState({});
+
+  console.log(id, subscription, 'updated')
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const isValid = validateFormData();
     if (isValid) {
-      const result = await addSubscription(formData);
-      console.log(result)
+      const results = await updateSubscription(id, formData);
+
+      console.log(results, 'results')
+
       setFormData({
         name: '',
         billing_cycle: '',
@@ -30,12 +39,7 @@ const AddSubscription = () => {
         nextBillingDate: '',
       });
 
-      if(result.success){
-
-        navigate('/dashboard') 
-      }
-
-
+      results.success && navigate('/dashboard')
     }
   };
 
@@ -148,7 +152,7 @@ const AddSubscription = () => {
                 type="date"
                 id="nextBillingDate"
                 name="nextBillingDate"
-                value={formData.nextBillingDate}
+                value={formData.renewal_date}
                 onChange={handleChange}
                 required
                 />
@@ -158,7 +162,7 @@ const AddSubscription = () => {
                 className="bg-greenish hover:bg-teal-600 text-white font-bold py-3 px-6 rounded mt-4"
                 type="submit"
             >
-                Add Subscription
+                Update Subscription
             </button>
                 </form>
             </div>
@@ -170,5 +174,5 @@ const AddSubscription = () => {
   );
 };
 
-export default AddSubscription;
+export default UpdateSubscription;
 

@@ -38,7 +38,7 @@ const Sidebar = () => {
             </Link>
             <Link to='/add-subscription' className="md:flex px-4 py-2  ">
                 <li className=" ">
-                    <FaCalendarAlt size={24} className="inline mr-2" />
+                    <FaPlus size={24} className="inline mr-2" />
                 </li>
                 <div className='md:flex hidden'>
                     Add Subscription

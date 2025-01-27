@@ -10,6 +10,7 @@ import ManageSubscription from "./pages/ManageSubscription";
 import Renewal from "./pages/Renewal";
 import { AuthProvider, AuthContext } from "./AuthContext";
 import { useContext } from "react";
+import UpdateSubscription from "./pages/UpdateSubscription";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function MainRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/add-subscription" element={<AddSubscription />} />
+      <Route path="/update-subscription/:id" element={<UpdateSubscription />} />
       <Route path="/manage-subscriptions" element={<ManageSubscription />} />
       <Route path="/renewals" element={<Renewal />} />
       <Route
