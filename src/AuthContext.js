@@ -70,6 +70,7 @@ const AuthProvider = ({ children }) => {
         }
       );
 
+      console.log("response", response);
       if (!response.ok) {
         console.log("response", response);
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -104,7 +105,7 @@ const AuthProvider = ({ children }) => {
   const fetchSubscriptions = async () => {
     try {
       const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/subscriptions",
+        "https://trakit-backend.onrender.com/api/v1/subscriptions",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
