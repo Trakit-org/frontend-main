@@ -71,6 +71,7 @@ const AuthProvider = ({ children }) => {
       );
 
       if (!response.ok) {
+        console.log("response", response);
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
