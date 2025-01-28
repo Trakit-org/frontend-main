@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
   const register = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/v1/auth/signup",
+        "https://trakit-backend-main.onrender.com/api/v1/auth/signup",
         {
           method: "POST",
           headers: {
