@@ -6,79 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 
-const subscriptionData = [
-  {
-    id: 1,
-    name: 'Netflix Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-03-15',
-    status: 'Active',
-  },
-  {
-    id: 2,
-    name: 'Amazon Prime Subscription',
-    billingCycle: 'Yearly',
-    nextBillingDate: '2024-03-15',
-    status: 'Active',
-  },
-  {
-    id: 3,
-    name: 'Spotify Premium Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-04-15',
-    status: 'Inactive',
-  },
-  {
-    id: 4,
-    name: 'Hulu Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-05-15',
-    status: 'Active',
-  },
-  {
-    id: 5,
-    name: 'Apple Music Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-06-15',
-    status: 'Active',
-  },
-  {
-    id: 6,
-    name: 'Disney+ Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-07-15',
-    status: 'Active',
-  },
-  {
-    id: 7,
-    name: 'HBO Max Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-08-15',
-    status: 'Inactive',
-  },
-  {
-    id: 8,
-    name: 'Starz Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-09-15',
-    status: 'Active',
-  },
-  {
-    id: 9,
-    name: 'Showtime Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-10-15',
-    status: 'Active',
-  },
-  {
-    id: 10,
-    name: 'Paramount+ Subscription',
-    billingCycle: 'Monthly',
-    nextBillingDate: '2023-11-15',
-    status: 'Inactive',
-  },
 
-];
 
 const ManageSubscriptionPage = () => {
   // const [subscriptions, setSubscriptions] = useState(subscriptions);
