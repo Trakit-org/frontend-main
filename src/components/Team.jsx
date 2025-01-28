@@ -1,6 +1,7 @@
 import React from "react";
 import Front from '../assets/front.jpg'
 import member1 from '../assets/member1.jpg'
+import member2 from '../assets/member2.jpg'
 import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 
@@ -56,7 +57,7 @@ const Team = () => {
         <div className="flex flex-col py-5 items-center bg-white rounded shadow-md">
           <div className="">
             <img
-              src={Front}
+              src={member2}
               alt="Employee 3"
               className=" w-40 rounded-full"
             />
