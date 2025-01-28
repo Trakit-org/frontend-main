@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/auth/login",
+        "https://trakit-backend.onrender.com/api/v1/auth/login",
         {
           method: "POST",
           headers: {
@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
       );
 
       if (!response.ok) {
+        console.log("response", response);
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
@@ -45,6 +46,7 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(data.user);
+      // setAccessToken(data.token);
       localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
 
@@ -58,7 +60,7 @@ const AuthProvider = ({ children }) => {
   const register = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/auth/signup",
+        "https://trakit-backend.onrender.com/api/v1/auth/signup",
         {
           method: "POST",
           headers: {
@@ -79,10 +81,7 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(data.user);
-      localStorage.setItem("token", data.token);
-      setIsAuthenticated(true);
-
-      return { success: true };
+      // setAccessToken(data.token);
     } catch (error) {
       console.error("Error registering user:", error);
       return { success: false, error: error.message };
