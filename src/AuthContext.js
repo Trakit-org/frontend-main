@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/auth/login",
+        "https://trakit-backend.onrender.com/api/v1/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
   const register = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/auth/signup",
+        "https://trakit-backend.onrender.com/api/v1/auth/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
