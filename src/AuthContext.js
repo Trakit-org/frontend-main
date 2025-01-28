@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
       }
       setUser(data.user);
       // setAccessToken(data.token);
-      localStorage.setItem("token", data.token.toString());
+      localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
       console.log("data received: ", data.user, data.token);
       return { success: true };
