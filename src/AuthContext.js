@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/auth/login",
+        "https://trakit-backend-main.onrender.com/api/v1/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
       }
       setUser(data.user);
       // setAccessToken(data.token);
-      localStorage.setItem("token", data.token.toString());
+      localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
       console.log("data received: ", data);
       console.log("data received: ", data.user, data.token);
