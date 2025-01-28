@@ -12,12 +12,14 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   const handleNavToggle = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  console.log(user, 'userhh')
 
   return (
     <header className="p-2 shadow-md bg-blue-500">
@@ -41,7 +43,7 @@ const Header = () => {
           <div className="md:flex hidden text-white items-center space-x-4 ml-16 mr-12">
             {user ? (
               <>
-                <div>Hi, {user.name}</div>
+                <div>Hi, {user.fullname}</div>
                 <button className="flex items-center text-gray-600 hover:text-gray-900">
                   <FaUserCircle className=" text-white" size={30} />
                 </button>

@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 const AddSubscription = () => {
-  const { addSubscription, user } = useContext(AuthContext);
+  const { addSubscription, user, accessToken } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -19,6 +19,9 @@ const AddSubscription = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log(accessToken, 'tokennn')
+
     const isValid = validateFormData();
     if (isValid) {
       const result = await addSubscription(formData);

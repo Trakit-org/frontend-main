@@ -1,6 +1,7 @@
 import React from "react";
 import Front from '../assets/front.jpg'
-import { FaFacebook } from "react-icons/fa";
+import member1 from '../assets/member1.jpg'
+import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 
 const Team = () => {
@@ -25,12 +26,31 @@ const Team = () => {
 
           <div className=" ">
             <h3 className="text-lg font-semibold md:mt-4 mt-3 name ">Donkor James</h3>
-            <p className="text-gray-600 mb-6">Software Engineer</p>
+            <p className="text-gray-600 mb-6">Full Stack Engineer</p>
           </div>
           <div className="flex space-x-1">
             <FaFacebook className=" w-12 h-8 text-greenish"/>
+            <FaLinkedin className=" w-12 h-8 text-greenish"/>
+            <FaTwitter className=" w-12 h-8 text-greenish"/>
+          </div>
+        </div>
+        <div className="flex flex-col py-5 items-center bg-white rounded shadow-md">
+          <div className="">
+            <img
+              src={member1}
+              alt="Employee 3"
+              className=" w-40 rounded-full"
+            />
+          </div>
+
+          <div className=" ">
+            <h3 className="text-lg font-semibold md:mt-4 mt-3 name ">Ikechukwu Ashimonye </h3>
+            <p className="text-gray-600 mb-6">Backend Engineer</p>
+          </div>
+          <div className="flex space-x-1">
             <FaFacebook className=" w-12 h-8 text-greenish"/>
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
+            <FaLinkedin className=" w-12 h-8 text-greenish"/>
+            <FaTwitter className=" w-12 h-8 text-greenish"/>
           </div>
         </div>
         <div className="flex flex-col py-5 items-center bg-white rounded shadow-md">
@@ -43,32 +63,13 @@ const Team = () => {
           </div>
 
           <div className=" ">
-            <h3 className="text-lg font-semibold md:mt-4 mt-3 name ">Donkor James</h3>
-            <p className="text-gray-600 mb-6">Software Engineer</p>
+            <h3 className="text-lg font-semibold md:mt-4 mt-3 name ">Mustapha Mohammed</h3>
+            <p className="text-gray-600 mb-6">Backend Engineer</p>
           </div>
           <div className="flex space-x-1">
             <FaFacebook className=" w-12 h-8 text-greenish"/>
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
-          </div>
-        </div>
-        <div className="flex flex-col py-5 items-center bg-white rounded shadow-md">
-          <div className="">
-            <img
-              src={Front}
-              alt="Employee 3"
-              className=" w-40 rounded-full"
-            />
-          </div>
-
-          <div className=" ">
-            <h3 className="text-lg font-semibold md:mt-4 mt-3 name ">Donkor James</h3>
-            <p className="text-gray-600 mb-6">Software Engineer</p>
-          </div>
-          <div className="flex space-x-1">
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
-            <FaFacebook className=" w-12 h-8 text-greenish"/>
+            <FaLinkedin className=" w-12 h-8 text-greenish"/>
+            <FaTwitter className=" w-12 h-8 text-greenish"/>
           </div>
         </div>
 

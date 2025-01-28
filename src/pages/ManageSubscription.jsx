@@ -1,6 +1,6 @@
 // ManageSubscriptionPage.js
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../AuthContext";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -88,6 +88,12 @@ const ManageSubscriptionPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [subscriptionsPerPage, setSubscriptionsPerPage] = useState(5);
 
+  const currentDate = new Date();
+  const oneWeekAway = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+  console.log(currentDate > new Date("2025-03-23") )
+
+
   const navigate = useNavigate()
 
   console.log(subscriptions)
@@ -111,7 +117,7 @@ const ManageSubscriptionPage = () => {
     event.preventDefault();
     deleteSubscription(id)
     !currentSubscriptions && 
-    navigate('/dashboard')
+    redirect('/dashboard')
 
   };
 
@@ -147,7 +153,7 @@ const ManageSubscriptionPage = () => {
                   <h2 className="text-lg font-bold mb-2">{subscription.name} Subscription</h2>
                   <p className="text-gray-600">Billing Cycle: {subscription.billing_cycle}</p>
                   <p className="text-gray-600">Next Billing Date: {subscription.renewal_date}</p>
-                  {/* <p className="text-gray-600">Status:</p> */}
+                  <p className="text-gray-600">Status: {currentDate < new Date(subscription.renewal_date) ? "Active": "Not Active" }</p>
                   <div className="flex justify-end">
                     <Link to={`/update-subscription/${subscription.id}`}>
                       <button

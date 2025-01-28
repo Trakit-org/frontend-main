@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,redirect } from 'react-router-dom';
 import { AuthContext } from "../AuthContext";
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 
 const UpdateSubscription = () => {
-  const { updateSubscription, subscriptions, user } = useContext(AuthContext);
+  const { updateSubscription, subscriptions, user, accessToken } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const { id } = useParams()
 
@@ -26,6 +26,9 @@ const UpdateSubscription = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log(accessToken, 'tokennn')
+
     const isValid = validateFormData();
     if (isValid) {
       const results = await updateSubscription(id, formData);
@@ -36,10 +39,14 @@ const UpdateSubscription = () => {
         name: '',
         billing_cycle: '',
         price: '',
-        nextBillingDate: '',
+        renewal_date: '',
       });
 
-      results.success && navigate('/dashboard')
+     if (results.success){ 
+      console.log('success')
+      navigate('/dashboard')
+      redirect('/dashboard')
+    }
     }
   };
 
@@ -54,8 +61,8 @@ const UpdateSubscription = () => {
     if (!formData.price) {
       errors.price = 'Cost is required';
     }
-    if (!formData.nextBillingDate) {
-      errors.nextBillingDate = 'Next billing date is required';
+    if (!formData.renewal_date) {
+      errors.renewal_date = 'Next billing date is required';
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -151,7 +158,7 @@ const UpdateSubscription = () => {
                 className="block w-full p-2 border border-gray-300 rounded-lg"
                 type="date"
                 id="nextBillingDate"
-                name="nextBillingDate"
+                name="renewal_date"
                 value={formData.renewal_date}
                 onChange={handleChange}
                 required

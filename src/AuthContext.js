@@ -23,16 +23,13 @@ const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await fetch(
-        "https://trakit-backend.onrender.com/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(credentials),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
 
       if (!response.ok) {
         console.log("response", response);
@@ -46,6 +43,7 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(data.user);
+      console.log("data", data);
       // setAccessToken(data.token);
       localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
@@ -59,17 +57,13 @@ const AuthProvider = ({ children }) => {
 
   const register = async (credentials) => {
     try {
-      const response = await fetch(
-        "https://trakit-backend.onrender.com/api/v1/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(credentials),
-          mode: "no-cors",
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
 
       console.log("response", response);
       if (!response.ok) {
@@ -85,6 +79,7 @@ const AuthProvider = ({ children }) => {
 
       setUser(data.user);
       // setAccessToken(data.token);
+      return { success: true };
     } catch (error) {
       console.error("Error registering user:", error);
       return { success: false, error: error.message };
@@ -105,14 +100,11 @@ const AuthProvider = ({ children }) => {
 
   const fetchSubscriptions = async () => {
     try {
-      const response = await fetch(
-        "https://trakit-backend.onrender.com/api/v1/subscriptions",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/subscriptions", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -127,17 +119,14 @@ const AuthProvider = ({ children }) => {
 
   const addSubscription = async (subscriptionData) => {
     try {
-      const response = await fetch(
-        "https://trakit-backend-main.onrender.com/api/v1/subscriptions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(subscriptionData),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/subscriptions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(subscriptionData),
+      });
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -155,7 +144,7 @@ const AuthProvider = ({ children }) => {
   const updateSubscription = async (id, updatedData) => {
     try {
       const response = await fetch(
-        `https://trakit-backend-main.onrender.com/api/v1/subscriptions/${id}`,
+        `http://localhost:5000/api/subscriptions/${id}`,
         {
           method: "PUT",
           headers: {
@@ -182,7 +171,7 @@ const AuthProvider = ({ children }) => {
   const deleteSubscription = async (id) => {
     try {
       const response = await fetch(
-        `https://trakit-backend-main.onrender.com/api/v1/subscriptions/${id}`,
+        `http://localhost:5000/api/subscriptions/${id}`,
         {
           method: "DELETE",
           headers: {

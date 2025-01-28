@@ -11,13 +11,14 @@ const Renewal = () => {
   const { subscriptions } = useContext(AuthContext);
   const [filteredRenewals, setFilteredRenewals] = useState(subscriptions); // Initialize with all subscriptions
 
+  const currentDate = new Date();
   // Filtered renewals based on due date
   const renewalsDueSoon = useMemo(() => {
     const currentDate = new Date();
     const oneWeekAway = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
     return subscriptions.filter((subscription) => {
       const renewalDate = new Date(subscription.renewal_date);
-      console.log(renewalDate < oneWeekAway, subscription.name)
+      console.log(renewalDate, oneWeekAway, subscription.name)
       return renewalDate < oneWeekAway;
     });
   }, [subscriptions]);
@@ -62,7 +63,7 @@ const Renewal = () => {
           <div className="flex flex-wrap -mx-4">
             {currentRenewals.length === 0 ? (
               <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28 ">
-                No matching subscription
+                No renewal of subscriptions due soon
               </h2>
             ) : (
               currentRenewals.map((renewal) => (
@@ -71,7 +72,19 @@ const Renewal = () => {
                     <h2 className="text-lg font-bold mb-2">{renewal.name}</h2>
                     <p className="text-gray-600">Renewal Date: {renewal.renewal_date}</p>
                     <p className="text-gray-600">Amount: {renewal.price}</p>
+                    <p className="text-gray-600">Status: {currentDate < new Date(renewal.renewal_date) ? "Active": "Not Active" }</p>
+
                     {/* <p className="text-gray-600">Status: {renewal.status}</p> */}
+                    <div className=' mt-2'>
+
+                         <Link to={`/update-subscription/${renewal.id}`} className='mt-2'>
+                                        <button
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                        Edit
+                                        </button>
+                                      </Link>
+                    </div>
                   </div>
                 </div>
               ))
