@@ -29,7 +29,7 @@ const Register = () => {
                 setIsAuthenticated(true);
                 navigate('/dashboard');
             }else{
-                setError(result.error == 'Failed to fetch' ? 'Try again': result.error);
+                setError(result.error == 'Failed to fetch' ? 'Try again, something went wrong': result.error);
             }
         }
     };

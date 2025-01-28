@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchSubscriptions(); // Fetch subscriptions when authenticated
-    fetchUser();
     setError(error + 1);
     console.log("error cc", error);
   }, []);
@@ -25,58 +24,68 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/auth/login",
+        "https://trakit-backend-main.onrender.com/api/v1/auth/login",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(credentials),
         }
       );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
       const data = await response.json();
+
       if (data.error) {
-        console.log(data.error);
         throw new Error(data.error);
       }
+
       setUser(data.user);
-      // setAccessToken(data.token);
-      localStorage.setItem("token", data.token.toString());
+      localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
-      console.log("data received: ", data);
-      console.log("data received: ", data.user, data.token);
+
       return { success: true };
     } catch (error) {
-      console.log("error", error);
-      console.error("err:", error);
-      return { success: false, error: error.message };
-      // Handle login error
+      console.error("Error logging in user:", error);
+      return { success: false, error: "Wrong email or password" };
     }
   };
 
-  //   Can I use contextapi instead of redux toolkits for authentication and authentication, including login registration, user dashboard, and also how to handle routing
   const register = async (credentials) => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/auth/signup",
+        "https://trakit-backend-main.onrender.com/api/v1/auth/signup",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(credentials),
         }
       );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
       const data = await response.json();
+
       if (data.error) {
         throw new Error(data.error);
       }
+
       setUser(data.user);
-      // setAccessToken(data.token);
-      localStorage.setItem("token", data.token.toString());
+      localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
-      console.log("data received: ", data.user, data.token);
+
       return { success: true };
     } catch (error) {
-      console.error(error);
+      console.error("Error registering user:", error);
       return { success: false, error: error.message };
-      // Handle register error
     }
   };
 
@@ -87,47 +96,37 @@ const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  const getSubscription = (id) => {
+    const subscription = subscriptions.filter((subs) => subs.id == id);
+    setSubscription(subscription);
+  };
+
   const fetchSubscriptions = async () => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/subscriptions",
+        "https://trakit-backend-main.onrender.com/api/v1/subscriptions",
         {
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
       );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
       const data = await response.json();
-      console.log("subs", data);
       setSubscriptions(data);
     } catch (error) {
       console.error("Error fetching subscriptions:", error);
     }
   };
 
-  const fetchUser = async () => {
-    try {
-      const response = await fetch(
-        "https://trakit-backend.onrender.com/api/users/me",
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      );
-      const data = await response.json();
-      console.log(data, "data");
-      setUser(data.user);
-    } catch (error) {
-      console.error("Error fetching user1:", error);
-    }
-  };
-
-  const getSubscription = (id) => {
-    const subscription = subscriptions.filter((subs) => subs.id == id);
-    setSubscription(subscription);
-  };
-
   const addSubscription = async (subscriptionData) => {
     try {
       const response = await fetch(
-        "https://trakit-backend.onrender.com/api/subscriptions",
+        "https://trakit-backend-main.onrender.com/api/v1/subscriptions",
         {
           method: "POST",
           headers: {
@@ -137,14 +136,15 @@ const AuthProvider = ({ children }) => {
           body: JSON.stringify(subscriptionData),
         }
       );
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
+
+      const data = await response.json();
       setSubscriptions((prevSubs) => [...prevSubs, data.subscription]);
       return { success: true };
     } catch (error) {
-      console.log(error.message);
       console.error("Error adding subscription:", error);
       return { success: false, error: error.message };
     }
@@ -153,7 +153,7 @@ const AuthProvider = ({ children }) => {
   const updateSubscription = async (id, updatedData) => {
     try {
       const response = await fetch(
-        `https://trakit-backend.onrender.com/api/subscriptions/${id}`,
+        `https://trakit-backend-main.onrender.com/api/v1/subscriptions/${id}`,
         {
           method: "PUT",
           headers: {
@@ -163,11 +163,12 @@ const AuthProvider = ({ children }) => {
           body: JSON.stringify(updatedData),
         }
       );
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
+      const data = await response.json();
       fetchSubscriptions();
       return { success: true };
     } catch (error) {
@@ -178,13 +179,19 @@ const AuthProvider = ({ children }) => {
 
   const deleteSubscription = async (id) => {
     try {
-      await fetch(
-        `https://trakit-backend.onrender.com/api/subscriptions/${id}`,
+      const response = await fetch(
+        `https://trakit-backend-main.onrender.com/api/v1/subscriptions/${id}`,
         {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
       );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
 
       const newSubs = subscriptions.filter((sub) => sub.id !== id);
       setSubscriptions(newSubs);
@@ -193,35 +200,6 @@ const AuthProvider = ({ children }) => {
       console.error("Error deleting subscription:", error);
     }
   };
-
-  // const refreshAccessToken = async () => {
-  //   try {
-  //     const response = await fetch("https://trakit-backend.onrender.com/api/refresh-token", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ acc }),
-  //     });
-  //     const data = await response.json();
-  //     setAccessToken(token);
-  //   } catch (error) {
-  //     if (error.status === 401) {
-  //       // Refresh token has expired, log user out
-  //       logout();
-  //       // Redirect to login page
-  //       // navigate("/login");
-  //     }
-  //   }
-  // };
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     // Check if access token is expired
-  //     if (accessToken && Date.now() / 1000 > accessToken.exp) {
-  //       refreshAccessToken();
-  //     }
-  //   }, 1000 * 60); // Check every minute
-
-  //   return () => clearInterval(intervalId);
-  // }, [accessToken, refreshAccessToken]);
 
   return (
     <AuthContext.Provider
