@@ -7,11 +7,11 @@ const Testimonial = () => {
         author: 'John Doe',
     },
     {
-      text: "Trakit has been a game-changer for me! I was tired of unexpected subscription charges and overdraft fees. Now, I can easily track and manage all my subscriptions in one place. Thanks to Trakit, I've saved money and reduced stress. Five stars isn't enough - I'd give it ten",
+      text: "Trakit has been a game-changer for me! I was tired of unexpected subscription charges and overdraft fees. Now, I can easily track and manage all my subscriptions in one place. Thanks to Trakit,",
       author: 'Jane Evans',
     },
     {
-      text: "I was skeptical at first, but Trakit has genuinely simplified my life. The platform is intuitive, and the reminders are super helpful. I no longer worry about missing payments or forgetting to cancel unwanted subscriptions. Trakit has given me peace of mind and more control over my finances.",
+      text: "I was skeptical at first, but Trakit has genuinely simplified my life. The platform is intuitive, and the reminders are super helpful. I no longer worry about missing payments or forgetting to cancel unwanted subscriptions.",
       author: 'Bob Smith',
     },
   ];
