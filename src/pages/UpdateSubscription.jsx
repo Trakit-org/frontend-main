@@ -89,7 +89,7 @@ const UpdateSubscription = () => {
             <Header />
             <div className="flex flex-col md:flex-row justify-center md:items-start md:p-20 p-4">
             <div className="md:w-1/2 mt-4 md:mt-0  md:text-start">
-                <h1 className="text-3xl font-bold mb-4">Add Subscription Details</h1>
+                <h1 className="text-3xl font-bold mb-4">Update Subscription Details</h1>
                 <p className="text-lg text-gray-600">
                     Please enter your subscription details below.This will help us track your subscriptions and provide 
                     personalized recommendations.
