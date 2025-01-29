@@ -73,8 +73,8 @@ const ManageSubscriptionPage = () => {
               />
           </div>
           <div className="flex flex-wrap -mx-4">
-              {currentSubscriptions.length === 0 && filteredSubscriptions === 0 ? (
-                  <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28 ">No matching subscription</h2>
+              {currentSubscriptions.length === 0 ? (
+                  <h2 className="text-center font-semibold text-2xl w-full mt-16 pt-4 pb-28 ">No subscription</h2>
               ) : currentSubscriptions.map((subscription) => (
               <div key={(subscription.id)} className="w-full md:w-1/2 xl:w-1/3 p-4">
                   <div className="bg-white rounded-lg shadow-md p-4">
