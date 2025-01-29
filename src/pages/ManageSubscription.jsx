@@ -44,8 +44,10 @@ const ManageSubscriptionPage = () => {
   const handleDelete = (event, id) => {
     event.preventDefault();
     deleteSubscription(id)
-    !currentSubscriptions && 
-    redirect('/dashboard')
+    if(!currentSubscriptions){
+      navigate('/dashboard')
+      redirect('/dashboard')
+    }
 
   };
 
