@@ -47,8 +47,8 @@ const AuthProvider = ({ children }) => {
 
       setUser(data.user);
       console.log("data", data);
-      // setAccessToken(data.token);
       localStorage.setItem("token", data.token);
+      setAccessToken(data.token);
       setIsAuthenticated(true);
 
       console.log("token when login", data.token);
@@ -86,7 +86,9 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(data.user);
+      localStorage.setItem("token", data.token);
       setAccessToken(data.token);
+      setIsAuthenticated(true);
       return { success: true };
     } catch (error) {
       console.error("Error registering user:", error);
