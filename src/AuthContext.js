@@ -51,6 +51,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
 
+      console.log("token when login", data.token);
       return { success: true };
     } catch (error) {
       console.error("Error logging in user:", error);
