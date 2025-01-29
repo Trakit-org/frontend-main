@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(data.user);
-      // setAccessToken(data.token);
+      setAccessToken(data.token);
       return { success: true };
     } catch (error) {
       console.error("Error registering user:", error);
