@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await fetch(
-        "https://jdonkor.pythonanywhere.com/api/login",
+        "https://trakit-backend.onrender.com/api/v1/auth/login",
         {
           method: "POST",
           headers: {
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
   const register = async (credentials) => {
     try {
       const response = await fetch(
-        "https://jdonkor.pythonanywhere.com/api/register",
+        "https://trakit-backend.onrender.com/api/v1/auth/register",
         {
           method: "POST",
           headers: {
@@ -111,7 +111,7 @@ const AuthProvider = ({ children }) => {
   const fetchSubscriptions = async () => {
     try {
       const response = await fetch(
-        "https://jdonkor.pythonanywhere.com/api/subscriptions",
+        "https://trakit-backend.onrender.com/api/v1/subscriptions",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -133,7 +133,7 @@ const AuthProvider = ({ children }) => {
   const addSubscription = async (subscriptionData) => {
     try {
       const response = await fetch(
-        "https://jdonkor.pythonanywhere.com/api/subscriptions",
+        "https://trakit-backend.onrender.com/api/v1/subscriptions",
         {
           method: "POST",
           headers: {
@@ -160,7 +160,7 @@ const AuthProvider = ({ children }) => {
   const updateSubscription = async (id, updatedData) => {
     try {
       const response = await fetch(
-        `https://jdonkor.pythonanywhere.com/api/subscriptions/${id}`,
+        `https://trakit-backend.onrender.com/api/v1/subscriptions/${id}`,
         {
           method: "PUT",
           headers: {
@@ -187,7 +187,7 @@ const AuthProvider = ({ children }) => {
   const deleteSubscription = async (id) => {
     try {
       const response = await fetch(
-        `https://jdonkor.pythonanywhere.com/api/subscriptions/${id}`,
+        `https://trakit-backend.onrender.com/api/v1/subscriptions/${id}`,
         {
           method: "DELETE",
           headers: {
