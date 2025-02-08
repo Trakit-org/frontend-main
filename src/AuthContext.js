@@ -69,7 +69,6 @@ const AuthProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(credentials),
-          mode: "cors",
         }
       );
 
